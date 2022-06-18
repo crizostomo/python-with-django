@@ -19,7 +19,7 @@ class Course(Base):
     def __str__(self):
         return self.title
 
-class Appraise(Base):
+class Appraisal(Base):
     course = models.ForeignKey(Course, related_name='appraisals', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     email = models.EmailField()
