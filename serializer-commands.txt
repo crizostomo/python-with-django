@@ -12,3 +12,10 @@ type(serializer)
 dir(serializer)
 serializer.data
 JSONRenderer().render(serializer.data)
+
+python manage.py makemigration
+python manage.py migrate
+python manage.py createsuperuser
+
+pip install djangorestframework markdown django-filter
+pip freeze > requirements.txt
