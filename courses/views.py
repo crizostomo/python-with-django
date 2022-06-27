@@ -4,6 +4,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework import mixins
 
 from .models import Course, Appraisal
 from .serializers import SerializerCourse, SerializerAppraisal
@@ -11,6 +12,7 @@ from .serializers import SerializerCourse, SerializerAppraisal
 """
 API V1
 """
+
 
 class CoursesAPIView(generics.ListCreateAPIView):
     queryset = Course.objects.all()
@@ -44,9 +46,11 @@ class AppraisalAPIView(generics.RetrieveUpdateDestroyAPIView):
         return get_object_or_404(self.get_queryset(),
                                  pk=self.kwargs.get('appraisal_pk'))
 
+
 """
 AP1 V2
 """
+
 
 class ViewSetCourse(viewsets.ModelViewSet):
     queryset = Course.objects.all()
@@ -58,6 +62,20 @@ class ViewSetCourse(viewsets.ModelViewSet):
         serializer = SerializerAppraisal(course.appraisals.all(), many=True)
         return Response(serializer.data)
 
+
+"""
 class ViewSetAppraisal(viewsets.ModelViewSet):
+    queryset = Appraisal.objects.all()
+    serializer_class = SerializerAppraisal
+"""
+
+
+class ViewSetAppraisal(
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    viewsets.GenericViewSet):
     queryset = Appraisal.objects.all()
     serializer_class = SerializerAppraisal
