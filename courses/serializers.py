@@ -23,6 +23,8 @@ class SerializerAppraisal(serializers.ModelSerializer):
 
 
 class SerializerCourse(serializers.ModelSerializer):
+    # Nested Relationship
+    appraisals = SerializerAppraisal(many=True, read_only=True)
 
     class Meta:
         model = Course
@@ -31,5 +33,6 @@ class SerializerCourse(serializers.ModelSerializer):
             'title',
             'url',
             'creation',
-            'active'
+            'active',
+            'appraisals'
         )
