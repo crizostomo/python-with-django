@@ -27,10 +27,10 @@ class SerializerCourse(serializers.ModelSerializer):
     # appraisals = SerializerAppraisal(many=True, read_only=True)
 
     # HyperLinked Related Field
-    appraisals = serializers.HyperlinkedRelatedField(
-        many=True,
-        read_only=True,
-        view_name='appraisal-detail')
+    # appraisals = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='appraisal-detail')
+
+    # Primary Key Related Field
+    appraisals = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Course
