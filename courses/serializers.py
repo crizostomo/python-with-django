@@ -24,7 +24,13 @@ class SerializerAppraisal(serializers.ModelSerializer):
 
 class SerializerCourse(serializers.ModelSerializer):
     # Nested Relationship
-    appraisals = SerializerAppraisal(many=True, read_only=True)
+    # appraisals = SerializerAppraisal(many=True, read_only=True)
+
+    # HyperLinked Related Field
+    appraisals = serializers.HyperlinkedRelatedField(
+        many=True,
+        read_only=True,
+        view_name='appraisal-detail')
 
     class Meta:
         model = Course
