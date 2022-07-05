@@ -15,6 +15,8 @@ class Course(Base):
     class Meta:
         verbose_name = 'Course'
         verbose_name_plural = 'Courses'
+        ordering = ['id']
+        # ordering = ['-id'] use this to organize by decreasing the ids
 
     def __str__(self):
         return self.title
@@ -30,6 +32,8 @@ class Appraisal(Base):
         verbose_name = 'Appraisal'
         verbose_name_plural = 'Appraisals'
         unique_together = ['email', 'course']
+        ordering = ['id']
+        # ordering = ['-id'] use this to organize by decreasing the ids
 
     def __str__(self):
         return f'{self.name} appraised the course {self.course} with grade {self.appraisal}'

@@ -58,8 +58,15 @@ class ViewSetCourse(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['get'])
     def appraisals(self, request, pk=None):
-        course = self.get_object()
-        serializer = SerializerAppraisal(course.appraisals.all(), many=True)
+        self.pagination_class.page_size = 2 # Defining manually the pagination for the route 'appraisals'
+        appraisals = Appraisal.objects.filter(course_id=pk)
+        page = self.paginate_queryset(appraisals)
+
+        if page is not None:
+            serializer = SerializerAppraisal(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = SerializerAppraisal(appraisals, many=True)
         return Response(serializer.data)
 
 
