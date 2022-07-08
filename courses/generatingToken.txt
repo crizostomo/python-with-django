@@ -1,0 +1,18 @@
+Generating a token
+
+On terminal: python manage.py shell
+
+>>> from rest_framework.authtoken.models import Token
+>>> from django.contrib.auth.models import User
+>>> diogo = User.objects.get(id=1)
+>>> diogo
+<User: diogo>
+>>> diogo.email
+'zxcv@example.com'
+>>> diogo.username
+'diogo'
+>>> token = Token.objects.create(user=diogo)
+>>> token.key
+
+Passar no postman dentro do Header:
+Authorization | Token 489631c4671c5d56e4a0ad7a1c4c59ecf8f335d6

@@ -8,6 +8,9 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
+
+Token: 489631c4671c5d56e4a0ad7a1c4c59ecf8f335d6
+
 """
 import os
 from pathlib import Path
@@ -40,6 +43,7 @@ INSTALLED_APPS = [
 
     'django_filters', #Extra Library
     'rest_framework', #Extra Library
+    'rest_framework.authtoken', #To Generate Tokens
 
     'courses', #My Applications
 ]
@@ -130,7 +134,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #DRF
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
+    #    'rest_framework.authentication.SessionAuthentication', #It could leave both of these authentications, however we could have leaks in our system
+        'rest_framework.authentication.TokenAuthentication',
+
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
