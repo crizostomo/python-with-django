@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 
-Token: 489631c4671c5d56e4a0ad7a1c4c59ecf8f335d6
+Token Diogo: 489631c4671c5d56e4a0ad7a1c4c59ecf8f335d6
+Token Zoro: e1397716861a767d9fcdf156329993831ec42bf3
 
 """
 import os

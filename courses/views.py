@@ -6,8 +6,12 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import mixins
 
+from rest_framework import permissions
+
 from .models import Course, Appraisal
 from .serializers import SerializerCourse, SerializerAppraisal
+from .permissions import IsSuperUser
+
 
 """
 API V1
@@ -53,6 +57,9 @@ AP1 V2
 
 
 class ViewSetCourse(viewsets.ModelViewSet):
+    permission_classes = (
+        IsSuperUser, #The order here matters
+        permissions.DjangoModelPermissions, )
     queryset = Course.objects.all()
     serializer_class = SerializerCourse
 
