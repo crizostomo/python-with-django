@@ -21,6 +21,11 @@ class SerializerAppraisal(serializers.ModelSerializer):
             'active'
         )
 
+    def validate_appraisal(self, value):
+        if value in range(1, 6):
+            return value
+        raise serializers.ValidationError("The appraisal needs to be a full number and needs to be between 1 and 5")
+
 
 class SerializerCourse(serializers.ModelSerializer):
     # Nested Relationship
